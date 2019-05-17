@@ -21,10 +21,17 @@
     "yup": "^0.26.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-typescript": "^7.3.3",
     "@cesium133/forgjs": "^1.1.9",
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.2",
-    "jest": "^23.0.0",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
+    "eslint": "^5.16.0",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.4.5"
   },
   "keywords": [

@@ -1,0 +1,19 @@
+{
+  "extends": ["plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    // note that we are disabling some of the base eslint rules that would conflict with
+    // the @typescript-eslint ones.
+    "semi": "off",
+    "@typescript-eslint/semi": ["error"],
+    "quotes": ["warn", "double"],
+    "indent": "off",
+    "@typescript-eslint/indent": ["warn", 2],
+    "@typescript-eslint/camelcase": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off"
+  }
+}
