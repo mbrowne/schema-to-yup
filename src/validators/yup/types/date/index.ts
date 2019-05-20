@@ -1,12 +1,12 @@
-const { YupMixed } = require("../mixed");
-const { DateGuard, createDateGuard } = require("./guard");
+import { MixedSchemaEntry } from "../mixed";
+import { createDateGuard } from "./guard";
 
 const proceed = (obj, config = {}) => {
   return createDateGuard(obj, config).verify();
 };
 
 export function toDate(obj, config = {}) {
-  return proceed(obj, config) && buildDate(obj);
+  return proceed(obj, config) && buildSchemaEntry(obj);
 }
 
 export function toSchemaEntry(obj, config = {}) {
@@ -17,20 +17,17 @@ export function buildSchemaEntry(obj) {
   return DateSchemaEntry.schemaEntryFor(obj);
 }
 
-export function buildDate(obj) {
-  return DateSchemaEntry.create(obj);
-}
-
 // Note: all types inherit from mixed
 // See https://github.com/jquense/yup#mixed
-export class DateSchemaEntry extends YupMixed {
+export class DateSchemaEntry extends MixedSchemaEntry {
+
   constructor(obj) {
     super(obj);
     this.type = "date";
-    this.validatorTypeApi = this.yup.date();
+    // this.validatorTypeApi = this.yup.date();
   }
 
-  static create(obj) {
+  static schemaEntryFor(obj) {
     return new DateSchemaEntry(obj);
   }
 

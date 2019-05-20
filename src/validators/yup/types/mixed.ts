@@ -9,15 +9,32 @@ export class MixedSchemaEntry extends BaseType {
 
   constructor(obj) {
     super(obj);
+
+    // TODO refactor
+    Object.defineProperties(this, {
+      allEnabled: {
+        get() {
+          return [...this.baseEnabled, ...this.enabled];
+        }
+      },
+      baseAliasMap: {
+        get() {
+          return {
+            oneOf: ["enum"],
+            notOneOf: ["not"]
+          };
+        }
+      }
+    });
   }
 
   static create(obj) {
     return new MixedSchemaEntry(obj);
   }
 
-  get allEnabled() {
-    return [...this.baseEnabled, ...this.enabled];
-  }
+  // get allEnabled() {
+  //   return [...this.baseEnabled, ...this.enabled];
+  // }
 
   convert() {
     this.normalize();
@@ -44,10 +61,10 @@ export class MixedSchemaEntry extends BaseType {
     };
   }
 
-  get baseAliasMap() {
-    return {
-      oneOf: ["enum"],
-      notOneOf: ["not"]
-    };
-  }
+  // get baseAliasMap() {
+  //   return {
+  //     oneOf: ["enum"],
+  //     notOneOf: ["not"]
+  //   };
+  // }
 }

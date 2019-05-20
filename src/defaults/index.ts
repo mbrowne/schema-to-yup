@@ -1,5 +1,5 @@
-import * as jsonSchema from "./json-schema";
-import * as typeDef from "./type-def";
+import jsonSchema from "./json-schema";
+import typeDef from "./type-def";
 
 export const defaults = {
   "json-schema": jsonSchema,

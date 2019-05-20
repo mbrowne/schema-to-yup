@@ -14,9 +14,9 @@ export const defaults: any = {
   hasFormat: (obj: any, format: string) => obj && obj.format === format
 };
 
-(defaults.isDate = obj =>
-  obj && obj.type === "string" && defaults.hasDateFormat(obj.format)),
-  (defaults.isNumber = obj =>
-    obj && (obj.type === "number" || defaults.isInteger(obj)));
+defaults.isDate = obj =>
+  obj && obj.type === "string" && defaults.hasDateFormat(obj.format);
+defaults.isNumber = obj =>
+  obj && (obj.type === "number" || defaults.isInteger(obj));
 
 export default defaults;

@@ -1,6 +1,6 @@
 import { Guard } from "../guard";
 
-class DateGuard extends Guard {
+export class DateGuard extends Guard {
   config: any;
 
   constructor(obj: any, config = {}) {
@@ -12,11 +12,6 @@ class DateGuard extends Guard {
   }
 }
 
-function createDateGuard(obj, config) {
+export function createDateGuard(obj, config) {
   return new DateGuard(obj, config);
 }
-
-module.exports = {
-  createDateGuard,
-  DateGuard
-};

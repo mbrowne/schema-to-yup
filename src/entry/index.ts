@@ -1,7 +1,7 @@
 import { Base } from "../base";
 // import * as validators from "./validators";
 import { ObjectDef } from "../common/_types";
-import * as types from "../validators/types";
+import { types } from "../validators/types";
 
 export class SchemaEntryError extends Error {}
 
@@ -40,6 +40,11 @@ export class SchemaEntry extends Base {
   toEntry() {
     if (!this.isValidSchema()) this.error("Not a valid schema");
     const config = this.obj;
+
+    // TEMP
+    const schemaEntry = types.yup[config.config.getType(this.obj)].createSchemaEntry(this.obj);
+    return schemaEntry.processConstraint(this.key);
+
     // try to find a type specific Yup schema entry
 
     // TODO: make generic

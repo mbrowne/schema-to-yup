@@ -1,4 +1,4 @@
-import yup from "yup";
+import * as yup from "yup";
 import { Base } from "../base";
 import { SchemaEntry } from "../entry";
 import { createSchemaEntry } from "../create-entry";
@@ -120,8 +120,7 @@ export class YupBuilder extends Base {
   }
 
   propToValidatorSchemaEntry({ name, key, value = {} }) {
-    const entryBuilder =
-      this.createSchemaEntry || this.config.createYupSchemaEntry;
+    const entryBuilder = this.config.createYupSchemaEntry || this.createSchemaEntry;
     return entryBuilder({ name, key, value, config: this.config });
   }
 
