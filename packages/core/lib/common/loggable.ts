@@ -22,7 +22,7 @@ export class Loggable {
     this.err = typeof error === "function" ? error : console.error;
   }
 
-  error(methodName: string, errMsg: string, value?: any) {
+  error(errMsg: string, value?: any /*, methodName?: string*/) {
     // only disable if directly disabled
     if (this.enable.error === false) return;
     this.err && (value ? this.err(errMsg, value) : this.err(errMsg));

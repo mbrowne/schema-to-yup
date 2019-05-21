@@ -19,11 +19,12 @@ test("yup inserts custom messages for required fields", () => {
     }
   };
   try {
-    const yupSchema = new YupBuilder(message, config).schema;
+    const yupSchema = new YupBuilder(config).build(message);
     valid = yupSchema.validateSync({
       foo: "dfds"
     });
   } catch (e) {
+    console.log('e: ', e);
     valid = e.errors[0];
   }
   expect(valid).toBe("User is required");
@@ -45,7 +46,7 @@ test("yup inserts custom messages for regex fields", () => {
     }
   };
   try {
-    const yupSchema = new YupBuilder(message2, config).schema;
+    const yupSchema = new YupBuilder(config).build(message2);
     valid = yupSchema.validateSync({
       amazon: "dfds"
     });

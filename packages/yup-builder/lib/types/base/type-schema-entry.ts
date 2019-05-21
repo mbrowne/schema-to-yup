@@ -6,10 +6,10 @@ import {
   createNumericConstraint
 } from "@schema-validator/constraints";
 
-import { ObjectDef, TypeMatcher } from "@schema-validator/core";
+import { ObjectDef, Loggable } from "@schema-validator/core";
 // class ConvertYupSchemaError extends Error {}
 
-export class TypeSchemaEntry extends TypeMatcher {
+export class TypeSchemaEntry extends Loggable {
   config: any;
   key: string;
   format: string;
