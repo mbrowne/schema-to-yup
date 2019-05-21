@@ -19,7 +19,7 @@ export class TransformProps extends Loggable {
       // });
       const value = properties[key];
       const yupSchemaEntry = this.propToValidatorSchemaEntry({
-        name,
+        name: value.name,
         key,
         value
       });
@@ -31,7 +31,7 @@ export class TransformProps extends Loggable {
 
   propToValidatorSchemaEntry({ name, key, value = {} }) {
     const entryBuilder =
-      this.createSchemaEntry || this.config.createYupSchemaEntry;
+      this.createSchemaEntry.bind(this) || this.config.createYupSchemaEntry;
     return entryBuilder({ name, key, value, config: this.config });
   }
 
@@ -40,7 +40,6 @@ export class TransformProps extends Loggable {
     const { createSchemaEntry } = this;
     if (!createSchemaEntry) {
       this.error(
-        "createSchemaEntry",
         "missing createSchemaEntry on config",
         config
       );
