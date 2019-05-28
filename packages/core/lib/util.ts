@@ -108,7 +108,7 @@ export const isDateRange = obj => {
 };
 
 export const isObjectType = obj => {
-  return obj === Object(obj);
+  return obj !== null && typeof obj === "object";
 };
 
 export const isArray = type => {
@@ -176,9 +176,7 @@ export const schemaTypeOf = (entry: any = {}) => {
 };
 
 export const schemaEntryMainTypeOf = (entry: any = {}) => {
-  const { type } = entry;
-  const schemaType = schemaTypeOf(type);
-  return schemaEntryMainType(schemaType);
+  return schemaEntryMainType(schemaTypeOf(entry));
 };
 
 export const createAssign = map => (pos, value) => {

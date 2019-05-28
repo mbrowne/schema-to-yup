@@ -4,6 +4,7 @@
     "esModuleInterop": true,
     "declaration": true,
     "noImplicitAny": false,
+    "strictNullChecks": true,
     "removeComments": true,
     "noLib": false,
     "emitDecoratorMetadata": true,
@@ -14,7 +15,19 @@
     "baseUrl": "packages",
     "paths": {
       "@schema-validator/*": ["./*/lib"]
-    }
+    },
+    "build": true,
+    "composite": true
   },
-  "exclude": ["node_modules", "**/*.test.ts", "**/*.spec.ts", "**/__tests__/*.ts", "dist"]
+  "references": [
+    {"path": "./packages/core"},
+    {"path": "./packages/schema-walker"}
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/__tests__/*.ts",
+    "dist"
+  ]
 }

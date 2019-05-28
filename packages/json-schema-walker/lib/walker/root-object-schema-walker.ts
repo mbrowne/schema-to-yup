@@ -51,7 +51,7 @@ export class RootSchemaWalker extends CompositeSchemaEntryWalker {
       this.invalidProperties();
     }
     this.name = this.getName(this.schema);
-    this.properties = this.normalizeRequired(schema);
+    this.properties = normalizeRequired(schema);
     this.validSchema = true;
     return this;
   }
@@ -73,10 +73,6 @@ export class RootSchemaWalker extends CompositeSchemaEntryWalker {
 
   getName(obj) {
     return this.config.getName(obj);
-  }
-
-  normalizeRequired(schema?: any) {
-    this.properties = normalizeRequired(schema);
   }
 
   isRequired(value) {

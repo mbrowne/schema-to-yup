@@ -4,8 +4,12 @@
     "outDir": "./dist"
   },
   "include": [
-    "./lib",
-    "__tests__/json/array/_schemas_",
-    "../schema-resolver/lib/normalize-required.ts"
-  ]
+    "./lib"
+  ],
+  "references": [
+    {
+      "path": "../core"
+    }
+  ],
+  "build": true
 }
