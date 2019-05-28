@@ -13,16 +13,8 @@
     "sourceMap": true,
     "lib": ["es6"],
     "baseUrl": "packages",
-    "paths": {
-      "@schema-validator/*": ["./*/lib"]
-    },
-    "build": true,
     "composite": true
   },
-  "references": [
-    {"path": "./packages/core"},
-    {"path": "./packages/schema-walker"}
-  ],
   "exclude": [
     "node_modules",
     "**/*.test.ts",

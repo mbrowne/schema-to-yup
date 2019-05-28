@@ -26,6 +26,7 @@
     "url": "git+https://github.com/kristianmandrup/schema-to-yup.git"
   },
   "scripts": {
+    "build": "tsc",
     "test": "jest"
   },
   "bugs": {

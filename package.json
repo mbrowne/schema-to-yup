@@ -18,7 +18,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna run tsc",
+    "build": "lerna run build",
     "publish": "yarn build && lerna publish",
     "test": "jest"
   }

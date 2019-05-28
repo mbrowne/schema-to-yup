@@ -11,11 +11,11 @@ import { buildConfig } from "./config";
 
 const config = buildConfig();
 
-// const walker = new ObjectEntryWalker(config, {
-//   type: "object",
-//   children: [{ type: "foo" }, { type: "bar" }],
-// });
-const walker = new ArrayEntryWalker(config, [1, {type: "array elem"}, 3]);
+const walker = new ObjectEntryWalker(config, {
+  type: "object",
+  children: [{ type: "foo" }, { type: "bar" }],
+});
+// const walker = new ArrayEntryWalker(config, {items: [1, {type: "array elem"}, 3]});
 walker.walk({
   enter: entry => {
     console.log("enter", entry);
