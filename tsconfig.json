@@ -21,5 +21,6 @@
     "**/*.spec.ts",
     "**/__tests__/*.ts",
     "dist"
-  ]
+  ],
+  "files": ["global.d.ts"]
 }

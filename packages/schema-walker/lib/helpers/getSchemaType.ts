@@ -3,9 +3,9 @@ const { isObjectType } = util;
 
 export function getSchemaType(entry: any) {
   if (isObjectType(entry)) {
-    if (Array.isArray(entry)) {
-      return "array";
-    }
+    // if (Array.isArray(entry)) {
+    //   return "array";
+    // }
     if (!entry.type) {
       throw Error(`Missing 'type' field for entry: ${JSON.stringify(entry)}`);
     }

@@ -1,41 +1,57 @@
 import { ISchemaWalkerConfig } from "./config";
 
-export interface IWalkEventHandlers {
-  enter(entry: AnyObject);
-  exit(entry: AnyObject);
+export interface ISchemaVisitors<TEntry> {
+  [schemaType: string]: IVisitor<TEntry>;
 }
 
-export interface ISchemaWalker {
-  walk(handlers: IWalkEventHandlers): void;
+export type IVisitor<TEntry> = {
+  enter?: (entry: TEntry) => void;
+  exit?: (entry: TEntry) => void;
+};
+
+export interface ISchemaWalker<TEntry = AnyObject> {
+  walk(entry: AnyObject, visitors: ISchemaVisitors<TEntry>): void;
 }
 
-export abstract class SchemaWalkerAbstract implements ISchemaWalker {
+export abstract class SchemaWalkerAbstract<TEntry = AnyObject>
+  implements ISchemaWalker<TEntry> {
   config: ISchemaWalkerConfig;
-  entry: AnyObject;
 
-  constructor(config: ISchemaWalkerConfig, entry: AnyObject) {
+  constructor(config: ISchemaWalkerConfig) {
     this.config = config;
-    this.entry = entry;
   }
 
-  protected hasChildren() {
+  protected hasChildren(entry: TEntry) {
     return false;
   }
 
-  walk(handlers: IWalkEventHandlers) {
-    const { enter, exit } = handlers;
+  protected abstract getVisitorForEntry(
+    entry: TEntry,
+    visitors: ISchemaVisitors<TEntry>
+  ): IVisitor<TEntry> | undefined;
+
+  /**
+   * @param entry     schema entry
+   * @param visitors  map of visitor objects with enter() and exit() callbacks, indexed by schema type
+   * @param key       optional key for the current schema entry (useful when iterating object properties)
+   */
+  walk(entry: TEntry, visitors: ISchemaVisitors<TEntry>, key?: string) {
+    const { enter, exit } = this.getVisitorForEntry(entry, visitors) || {
+      enter: null,
+      exit: null,
+    };
     if (enter) {
-      enter(this.entry);
+      enter(entry);
     }
-    if (this.hasChildren()) {
-      this.walkChildren(handlers);
+    if (this.hasChildren(entry)) {
+      this.walkChildren(entry, visitors);
     }
     if (exit) {
-      exit(this.entry);
+      exit(entry);
     }
   }
 
-  protected walkChildren(handlers: IWalkEventHandlers) {
+  protected walkChildren(entry: TEntry, visitors: ISchemaVisitors<TEntry>) {
     console.warn("walkChildren() called but subclass did not implement it");
   }
 }

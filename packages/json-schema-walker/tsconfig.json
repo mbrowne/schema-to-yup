@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./lib"
+  },
+  "include": ["./lib"],
+  "references": [
+    {
+      "path": "../core"
+    },
+    {
+      "path": "../schema-walker"
+    }
+  ]
+}
