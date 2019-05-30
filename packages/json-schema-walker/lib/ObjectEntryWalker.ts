@@ -4,10 +4,11 @@ import {
   resolveSchemaWalkerFactory,
   getSchemaType,
 } from "@schema-validator/schema-walker";
-import invariant from "ts-invariant";
 
 export interface ObjectEntry {
   type: string;
+  title?: string;
+  propertyNames?: string[];
   properties?: {
     [propName: string]: any;
   };
@@ -18,8 +19,8 @@ export class ObjectEntryWalker extends CompositeEntryWalker<ObjectEntry> {
     return entry.hasOwnProperty("properties");
   }
 
-  protected getChildren(entry: ObjectEntry) {
-    return Object.entries(entry.properties!);
+  protected getChildren(entry: ObjectEntry): Iterable<any> {
+    return Object.entries((entry as ObjectEntry).properties!);
   }
 
   protected walkChildren(
@@ -27,10 +28,6 @@ export class ObjectEntryWalker extends CompositeEntryWalker<ObjectEntry> {
     visitors: ISchemaVisitors<ObjectEntry>
   ) {
     const children = this.getChildren(entry);
-    invariant(
-      children,
-      "getChildren() returned undefined. You need to check hasChildren() before calling walkChildren()."
-    );
     for (const [propName, childEntry] of children!) {
       const factory = resolveSchemaWalkerFactory(
         this.config,

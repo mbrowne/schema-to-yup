@@ -5,8 +5,8 @@ export interface ISchemaVisitors<TEntry> {
 }
 
 export type IVisitor<TEntry> = {
-  enter?: (entry: TEntry) => void;
-  exit?: (entry: TEntry) => void;
+  enter?: (entry: TEntry, key?: string) => void;
+  exit?: (entry: TEntry, key?: string) => void;
 };
 
 export interface ISchemaWalker<TEntry = AnyObject> {
@@ -41,13 +41,13 @@ export abstract class SchemaWalkerAbstract<TEntry = AnyObject>
       exit: null,
     };
     if (enter) {
-      enter(entry);
+      enter(entry, key);
     }
     if (this.hasChildren(entry)) {
       this.walkChildren(entry, visitors);
     }
     if (exit) {
-      exit(entry);
+      exit(entry, key);
     }
   }
 

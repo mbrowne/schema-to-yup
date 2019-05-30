@@ -1,4 +1,3 @@
-
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
@@ -58,9 +57,9 @@ module.exports = {
   // A set of global variables that need to be available in all test environments
   globals: {
     "ts-jest": {
-      "tsConfig": "tsconfig.json",
-      "diagnostics": false
-    }
+      tsConfig: "tsconfig.json",
+      diagnostics: false,
+    },
   },
 
   // An array of directory names to be searched recursively up from the requiring module's location
@@ -69,15 +68,11 @@ module.exports = {
   // ],
 
   // An array of file extensions your modules use
-  moduleFileExtensions: [
-    "ts",
-    "tsx",
-    "js"
-  ],
+  moduleFileExtensions: ["ts", "tsx", "js"],
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    "@schema-validator/(.*)": "<rootDir>/packages/$1/lib"
+    "@schema-validator/(.*)": "<rootDir>/packages/$1/lib",
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -139,11 +134,8 @@ module.exports = {
 
   // The glob patterns Jest uses to detect test files
   testMatch: [
-    "**/packages/schema-walker/__tests__/**/*.test.(j|t)s",
-    // "**/packages/schema-walker/lib/**/?(*.)+test.(j|t)s"
-    
-    // "**/packages/*/__tests__/**/*.test.(j|t)s",
-    // "**/packages/*/lib/**/?(*.)+test.(j|t)s"
+    "**/packages/**/__tests__/**/*.test.(j|t)s",
+    "**/packages/*/lib/**/?(*.)+test.(j|t)s",
   ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
@@ -168,7 +160,7 @@ module.exports = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest"
+    "^.+\\.(ts|tsx)$": "ts-jest",
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation

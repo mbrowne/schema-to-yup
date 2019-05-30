@@ -1,7 +1,9 @@
+import { util } from "@schema-validator/core";
 import { SchemaWalkerAbstract, ISchemaVisitors } from "../base-classes";
 import { resolveSchemaWalkerFactory } from "../helpers/resolveSchemaWalkerFactory";
 import { getSchemaType } from "../helpers/getSchemaType";
 import invariant from "ts-invariant";
+const { isObjectType } = util;
 
 /**
  * A composite entry can be either an object or array.
@@ -26,8 +28,8 @@ export abstract class CompositeEntryWalker<
   protected walkChildren(entry: TEntry, visitors: ISchemaVisitors<TEntry>) {
     const children = this.getChildren(entry);
     invariant(
-      children,
-      "getChildren() returned undefined. You need to check hasChildren() before calling walkChildren()."
+      isObjectType(children),
+      "getChildren() did not return an object. You need to check hasChildren() before calling walkChildren()."
     );
     for (const childEntry of children!) {
       const factory = resolveSchemaWalkerFactory(

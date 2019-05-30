@@ -1,0 +1,19 @@
+import { util } from "@schema-validator/core";
+import { CompositeEntryWalker } from "@schema-validator/schema-walker";
+import { ObjectEntry } from "../ObjectEntryWalker";
+const { isObjectType } = util;
+
+export interface ArrayItemsEntry {
+  type: string;
+  properties: ObjectEntry[];
+}
+
+export class ArrayEntryWalker extends CompositeEntryWalker {
+  protected hasChildren(items: ArrayItemsEntry) {
+    return isObjectType(items.properties);
+  }
+
+  protected getChildren(entry: ArrayItemsEntry) {
+    return entry.properties;
+  }
+}
