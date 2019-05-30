@@ -1,3 +1,3 @@
-// export { RootSchemaWalker, buildWalker } from "./RootSchemaWalker";
-export { ObjectEntryWalker } from "./ObjectEntryWalker";
-export { ArrayEntryWalker } from "./ArrayEntryWalker";
+export * from "./ObjectEntryWalker";
+export * from "./ArrayEntryWalker";
+export * from "./RootEntryWalker";

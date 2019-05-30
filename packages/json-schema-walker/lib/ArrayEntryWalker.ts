@@ -23,18 +23,3 @@ export class ArrayEntryWalker extends CompositeEntryWalker {
     return [entry.items!];
   }
 }
-
-// export interface ArrayEntry extends TypedEntry {
-//   type: string;
-//   items?: ObjectEntry[];
-// }
-
-// export class ArrayEntryWalker extends ObjectEntryWalker {
-//   protected hasChildren(entry: ArrayEntry) {
-//     return isObjectType(entry.items);
-//   }
-
-//   protected getChildren(entry: ArrayEntry) {
-//     return entry.items!;
-//   }
-// }

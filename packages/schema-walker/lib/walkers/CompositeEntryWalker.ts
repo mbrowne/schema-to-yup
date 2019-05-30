@@ -12,6 +12,12 @@ const { isObjectType } = util;
 export abstract class CompositeEntryWalker<
   TEntry = AnyObject
 > extends SchemaWalkerAbstract<TEntry> {
+  static validationMessages = {
+    missing: () => "Missing schema entry",
+    "wrong-type": providedType =>
+      `Invalid schema entry. Must be an Object, was: ${typeof providedType}`,
+  };
+
   protected abstract hasChildren(entry: TEntry): boolean;
 
   protected abstract getChildren(
@@ -23,6 +29,14 @@ export abstract class CompositeEntryWalker<
     visitors: ISchemaVisitors<TEntry>
   ) {
     return visitors[getSchemaType(entry)];
+  }
+
+  walk(entry: TEntry, visitors: ISchemaVisitors<TEntry>, key?: string) {
+    const errMessage = this.validate(entry);
+    if (errMessage) {
+      throw errMessage;
+    }
+    super.walk(entry, visitors, key);
   }
 
   protected walkChildren(entry: TEntry, visitors: ISchemaVisitors<TEntry>) {
@@ -37,6 +51,18 @@ export abstract class CompositeEntryWalker<
         getSchemaType(childEntry)
       );
       factory(this.config).walk(childEntry, visitors);
+    }
+  }
+
+  protected validate(
+    entry: TEntry,
+    validationMessages = CompositeEntryWalker.validationMessages
+  ) {
+    if (!entry) {
+      return validationMessages.missing();
+    }
+    if (!isObjectType(entry)) {
+      return validationMessages["wrong-type"](typeof entry);
     }
   }
 }

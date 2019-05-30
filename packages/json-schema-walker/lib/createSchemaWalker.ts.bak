@@ -1,0 +1,9 @@
+import { IJsonSchemaWalkerConfig } from "./config";
+import { ObjectEntryWalker } from "./ObjectEntryWalker";
+import { buildConfig } from "./config";
+
+export function createSchemaWalker(
+  config: Partial<IJsonSchemaWalkerConfig> = {}
+) {
+  return new ObjectEntryWalker(buildConfig(config));
+}

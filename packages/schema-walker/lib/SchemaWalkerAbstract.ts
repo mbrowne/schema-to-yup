@@ -1,4 +1,6 @@
+import { util } from "@schema-validator/core";
 import { ISchemaWalkerConfig } from "./config";
+const { isObjectType } = util;
 
 export interface ISchemaVisitors<TEntry> {
   [schemaType: string]: IVisitor<TEntry>;
