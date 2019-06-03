@@ -1,13 +1,14 @@
 import * as yup from "yup";
 import { Loggable, util } from "@schema-validator/core";
-import { TransformProps } from "./transform-props";
-const { isObject, isObjectType } = util;
+// const { isObjectType } = util;
 
 type YupApiMethod = "mixed " | "string" | "date";
 
 type ApiDef = {
   [key: string]: Function;
 };
+
+export const createBuilder = (config: any) => new YupBuilder();
 
 export class YupBuilder extends Loggable {
   type: YupApiMethod;
@@ -31,19 +32,8 @@ export class YupBuilder extends Loggable {
     return yup.object();
   }
 
-  build(shape: any) {
-    if (!isObject(shape)) {
-      return this.error(`invalid schema: must be an object type, was: ${shape.type}`);
-    }
-    const { properties } = shape;
-    if (!isObjectType(properties)) {
-      return this.error(
-        `invalid schema: must have a properties object: ${JSON.stringify(
-          properties
-        )}`
-      );
-    }
-    const transformer = new TransformProps(shape);
-    return this.object.shape(transformer.toShape());
+  build() {
+    // TODO
+    return {};
   }
 }

@@ -6,7 +6,8 @@ import {
   createNumericConstraint
 } from "@schema-validator/constraints";
 
-import { ObjectDef, Loggable } from "@schema-validator/core";
+import { util, Loggable, ObjectDef } from "@schema-validator/core";
+const { isFunctionType } = util;
 // class ConvertYupSchemaError extends Error {}
 
 export class TypeSchemaEntry extends Loggable {
@@ -42,16 +43,16 @@ export class TypeSchemaEntry extends Loggable {
   rebind(...methods) {
     methods.map(name => {
       const method = this[name];
-      this[name] = this.isFunctionType(method) ? method.bind(this) : method;
+      this[name] = isFunctionType(method) ? method.bind(this) : method;
     });
   }
 
   validateOnCreate(key, value) {
     if (!key) {
-      this.error("create: missing key");
+      this.error("validateOnCreate", "missing key");
     }
     if (!value) {
-      this.error("create: missing value");
+      this.error("validateOnCreate", "missing value");
     }
   }
 

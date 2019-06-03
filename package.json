@@ -13,13 +13,15 @@
     "lerna": "^3.13.1",
     "source-map-support": "^0.5.12",
     "ts-invariant": "^0.4.2",
-    "ts-jest": "^24.0.2"
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.1"
   },
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna run build",
+    "prebuild": "lerna run tsc -- -b --clean",
+    "build": "lerna run tsc -- -b --declarationMap",
     "publish": "yarn build && lerna publish",
     "test": "jest"
   }

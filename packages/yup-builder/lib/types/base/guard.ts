@@ -1,4 +1,4 @@
-import { Loggable, ObjectDef, util } from "@schema-validator/core";
+import { Loggable, util, ObjectDef } from "@schema-validator/core";
 const { isPresent } = util;
 
 export class Guard extends Loggable {
