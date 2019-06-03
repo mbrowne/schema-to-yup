@@ -14,14 +14,6 @@ export interface ObjectEntry {
   };
 }
 
-const validationMessages = {
-  ...CompositeEntryWalker.validationMessages,
-  missing: () => "Missing schema entry",
-  "wrong-type": providedType =>
-    `Invalid schema. Must be an Object, was: ${typeof providedType}`,
-  "missing-properties": () => "Invalid schema: must have a properties object",
-};
-
 export class ObjectEntryWalker extends CompositeEntryWalker<ObjectEntry> {
   protected hasChildren(entry: ObjectEntry) {
     return entry.hasOwnProperty("properties");
