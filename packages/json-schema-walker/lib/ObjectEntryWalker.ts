@@ -4,15 +4,7 @@ import {
   resolveSchemaWalkerFactory,
   getSchemaType,
 } from "@schema-validator/schema-walker";
-
-export interface ObjectEntry {
-  type: string;
-  title?: string;
-  propertyNames?: string[];
-  properties?: {
-    [propName: string]: any;
-  };
-}
+import { ObjectEntry } from "./types";
 
 export class ObjectEntryWalker extends CompositeEntryWalker<ObjectEntry> {
   protected hasChildren(entry: ObjectEntry) {

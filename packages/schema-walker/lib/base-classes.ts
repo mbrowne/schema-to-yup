@@ -3,4 +3,3 @@
 
 export * from "./SchemaWalkerAbstract";
 export * from "./walkers/CompositeEntryWalker";
-
